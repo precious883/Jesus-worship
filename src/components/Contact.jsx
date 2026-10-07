@@ -46,8 +46,8 @@ export default function Contact() {
           <div className="contact-info">
             <p><strong>Address:</strong> Behind J.D courtyard hotel, Osubi, Delta state, Nigeria</p>
             <p><strong>Email:</strong> jesusworshipministry15@gmail.com</p>
-            <p><strong>Phone:</strong> <a href="tel:+234912526298">0912526298</a></p>
-            <p><strong>WhatsApp:</strong> <a href="https://wa.me/234912526298" target="_blank" rel="noopener noreferrer">Chat with us on WhatsApp</a></p>
+            <p><strong>Phone:</strong> <a href="tel:+2349125126298">09125126298</a></p>
+            <p><strong>WhatsApp:</strong> <a href="https://wa.me/2349125126298" target="_blank" rel="noopener noreferrer">Chat with us on WhatsApp</a></p>
             <p><strong>Service Times:</strong> Sundays: Sunday School at 8:00 AM and Breakthrough Service at 9:00 AM; Tuesdays at 10:00 AM for Open Heaven Prophetic Program; Fridays at 4:00 PM for Divine Encounter Service</p>
           </div>
           <form className="contact-form" onSubmit={handleSubmit}>
