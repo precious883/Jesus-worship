@@ -26,7 +26,7 @@ export default function Header() {
       <div className="container header-inner">
         <a href="#home" className="logo" aria-label="Jesus Worship Interdenominational Prayer Ministry Int'l">
           <img src={churchLogo} alt="Church logo" className="logo-mark" />
-          <span className="logo-text">Jesus Worship <small>Prayer Ministry Int'l</small></span>
+          <span className="logo-text">Jesus Worship Interdenominational <small>Prayer Ministry Int'l</small></span>
         </a>
         <button
           className="nav-toggle"
