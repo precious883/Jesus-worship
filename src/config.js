@@ -6,8 +6,11 @@ export const YOUTUBE_UPLOADS_EMBED_URL = `https://www.youtube.com/embed/videoser
 // Optional: set a specific past-service video ID to always show instead of the live embed.
 export const YOUTUBE_FALLBACK_VIDEO_ID = '';
 
-// Upcoming program popup. Replace public/images/upcoming-program.jpeg with your new flyer (keep the same name).
+// Upcoming program popup. Add or remove flyer paths here as programs change.
 // Set UPCOMING_BANNER_ENABLED to false to hide the popup.
 export const UPCOMING_BANNER_ENABLED = true;
-export const UPCOMING_BANNER_IMAGE = '/images/upcoming-program.jpeg';
-
+export const UPCOMING_BANNER_IMAGES = [
+  '/images/new1.jpeg',
+  '/images/new2.jpeg',
+  '/images/new3.jpeg',
+];

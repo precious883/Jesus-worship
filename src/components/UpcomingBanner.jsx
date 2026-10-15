@@ -1,18 +1,28 @@
 import { useEffect, useState } from 'react';
-import { UPCOMING_BANNER_ENABLED, UPCOMING_BANNER_IMAGE } from '../config.js';
+import { UPCOMING_BANNER_ENABLED, UPCOMING_BANNER_IMAGES } from '../config.js';
 
-// Changes on every page load so a replaced flyer shows up instead of a cached copy.
-const imageSrc = `${UPCOMING_BANNER_IMAGE}?v=${Date.now()}`;
+// Changes on every page load so replaced flyers show up instead of cached copies.
+const imageSources = UPCOMING_BANNER_IMAGES.map(image => `${image}?v=${Date.now()}`);
 
 export default function UpcomingBanner() {
   const [open, setOpen] = useState(false);
   const [loaded, setLoaded] = useState(false);
+  const [currentImage, setCurrentImage] = useState(0);
 
   useEffect(() => {
     if (!UPCOMING_BANNER_ENABLED) return undefined;
     const timer = window.setTimeout(() => setOpen(true), 1200);
     return () => window.clearTimeout(timer);
   }, []);
+
+  useEffect(() => {
+    if (!open || UPCOMING_BANNER_IMAGES.length < 2) return undefined;
+    const timer = window.setInterval(() => {
+      setLoaded(false);
+      setCurrentImage(index => (index + 1) % UPCOMING_BANNER_IMAGES.length);
+    }, 7000);
+    return () => window.clearInterval(timer);
+  }, [open]);
 
   useEffect(() => {
     if (!open) return undefined;
@@ -32,12 +42,55 @@ export default function UpcomingBanner() {
       <div className="promo-card">
         <button type="button" className="promo-close" onClick={() => setOpen(false)} aria-label="Close upcoming program banner">&times;</button>
         <span className="promo-tag">Upcoming Program</span>
+        {UPCOMING_BANNER_IMAGES.length > 1 && (
+          <button
+            type="button"
+            className="promo-arrow promo-arrow-prev"
+            onClick={() => {
+              setLoaded(false);
+              setCurrentImage(index => (index - 1 + UPCOMING_BANNER_IMAGES.length) % UPCOMING_BANNER_IMAGES.length);
+            }}
+            aria-label="Show previous program banner"
+          >
+            &#8249;
+          </button>
+        )}
         <img
-          src={imageSrc}
+          src={imageSources[currentImage]}
           alt="Upcoming church program"
           onLoad={() => setLoaded(true)}
           onError={() => setOpen(false)}
         />
+        {UPCOMING_BANNER_IMAGES.length > 1 && (
+          <button
+            type="button"
+            className="promo-arrow promo-arrow-next"
+            onClick={() => {
+              setLoaded(false);
+              setCurrentImage(index => (index + 1) % UPCOMING_BANNER_IMAGES.length);
+            }}
+            aria-label="Show next program banner"
+          >
+            &#8250;
+          </button>
+        )}
+        {UPCOMING_BANNER_IMAGES.length > 1 && (
+          <div className="promo-dots" aria-label="Program banner selection">
+            {UPCOMING_BANNER_IMAGES.map((_, index) => (
+              <button
+                key={index}
+                type="button"
+                className={`promo-dot${index === currentImage ? ' active' : ''}`}
+                onClick={() => {
+                  setLoaded(false);
+                  setCurrentImage(index);
+                }}
+                aria-label={`Show program banner ${index + 1}`}
+                aria-current={index === currentImage ? 'true' : undefined}
+              />
+            ))}
+          </div>
+        )}
         <a href="#contact" className="btn btn-primary promo-btn" onClick={() => setOpen(false)}>Contact Us</a>
       </div>
     </div>
