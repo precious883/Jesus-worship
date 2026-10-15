@@ -18,7 +18,6 @@ export default function UpcomingBanner() {
   useEffect(() => {
     if (!open || UPCOMING_BANNER_IMAGES.length < 2) return undefined;
     const timer = window.setInterval(() => {
-      setLoaded(false);
       setCurrentImage(index => (index + 1) % UPCOMING_BANNER_IMAGES.length);
     }, 7000);
     return () => window.clearInterval(timer);
@@ -47,7 +46,6 @@ export default function UpcomingBanner() {
             type="button"
             className="promo-arrow promo-arrow-prev"
             onClick={() => {
-              setLoaded(false);
               setCurrentImage(index => (index - 1 + UPCOMING_BANNER_IMAGES.length) % UPCOMING_BANNER_IMAGES.length);
             }}
             aria-label="Show previous program banner"
@@ -66,7 +64,6 @@ export default function UpcomingBanner() {
             type="button"
             className="promo-arrow promo-arrow-next"
             onClick={() => {
-              setLoaded(false);
               setCurrentImage(index => (index + 1) % UPCOMING_BANNER_IMAGES.length);
             }}
             aria-label="Show next program banner"
@@ -82,7 +79,6 @@ export default function UpcomingBanner() {
                 type="button"
                 className={`promo-dot${index === currentImage ? ' active' : ''}`}
                 onClick={() => {
-                  setLoaded(false);
                   setCurrentImage(index);
                 }}
                 aria-label={`Show program banner ${index + 1}`}
